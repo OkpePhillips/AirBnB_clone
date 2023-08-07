@@ -14,17 +14,22 @@ class BaseModel:
     Definition of the BaseModel class Subclassed by most classes further along.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs = None):
+
         self.id = str(uuid4())
-        self.created_at = str(datetime.now().isoformat())
+        self.created_at = datetime.now()
         self.updated_at = self.created_at
 
     def save(self):
-        self.updated_at = str(datetime.now().isoformat())
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         dictionary = self.__dict__
         dictionary.update({"__class__": self.__class__.__name__})
+
+        dictionary["created_at"] = str(dictionary["created_at"].isoformat())
+        dictionary["updated_at"] = str(dictionary["updated_at"].isoformat())
+
         return dictionary
 
     def __str__(self):
