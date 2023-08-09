@@ -6,6 +6,7 @@ Module defines class 'FileStorage'
 
 
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -29,27 +30,61 @@ class FileStorage:
         """
         Set obj with key <obj class name>.id
         """
+
+        """
+
+        ####OLD
         self.__objects.update(
-                {f"{type(obj).__name__}.{obj.id}": obj.to_dict()}
-                )
+                {f"{type(obj).__name__}.{obj.id}": obj.to_dict()} 
+                )   #TODO
+
+        """
+        self.__objects.update(
+                {f"{type(obj).__name__}.{obj.id}": obj})   
+
 
     def save(self):
         """
         Serialize self.__objects to JSON put in path {self.__file_path}
         """
 
+        
+        converted_objects = {}
+        #print(self.__objects)
+        for ID in self.__objects.keys():
+            converted_objects.update(
+                {f"{ID}": self.__objects[ID].to_dict()}
+                )
+            
+
+        """
+        ####OLD
         with open(self.__file_path, "w") as file:
             # Raises OSError on path absence.
-            json.dump(self.__objects, file)
+            json.dump(self.__objects, file) #TODO
+
+        """
+
+        with open(self.__file_path, "w") as file:
+            json.dump(converted_objects, file)
+            
 
     def reload(self):
         """
         Deserialize JSON file to self.__objects.
         """
 
+##TODO............
         try:
             with open(self.__file_path, "r") as file:
-                self.__objects = json.load(file)
+
+                JSON_recovered_dictionaries = json.load(file)
+
+            for ID in JSON_recovered_dictionaries.keys():
+                obj_class = JSON_recovered_dictionaries[ID]["__class__"]
+                self.__objects.update(
+                        {ID: eval(f"{obj_class}({JSON_recovered_dictionaries[ID]})")}
+                       )
 
         except OSError:
             pass
