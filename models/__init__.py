@@ -6,7 +6,7 @@ Preps new storage class instance
 """
 
 
-import models.engine.file_storage as file_storage
+from models.engine.file_storage import FileStorage
 
-storage = file_storage.FileStorage()
+storage = FileStorage()
 storage.reload()

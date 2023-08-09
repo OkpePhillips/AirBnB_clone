@@ -29,6 +29,7 @@ class HBNBCommand(cmd.Cmd):
         """
 
         # Add Line before quit?
+        print()
         self.do_quit(line)
 
     def emptyline(self):
