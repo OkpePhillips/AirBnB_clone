@@ -7,6 +7,7 @@ Module defines class 'FileStorage'
 
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -50,11 +51,15 @@ class FileStorage:
 
         
         converted_objects = {}
-        #print(self.__objects)
+
+        #  print("SAVING-----")
+        print(self.__objects)
         for ID in self.__objects.keys():
             converted_objects.update(
                 {f"{ID}": self.__objects[ID].to_dict()}
                 )
+
+        #  print("ENDSAVE\n")
             
 
         """
@@ -80,11 +85,17 @@ class FileStorage:
 
                 JSON_recovered_dictionaries = json.load(file)
 
+             #   print("Recovered Dictionaries--------")
+             #  print(JSON_recovered_dictionaries,end="\n\n" )
+
             for ID in JSON_recovered_dictionaries.keys():
                 obj_class = JSON_recovered_dictionaries[ID]["__class__"]
-                self.__objects.update(
-                        {ID: eval(f"{obj_class}({JSON_recovered_dictionaries[ID]})")}
-                       )
+                self.new(
+                        eval(obj_class)(**JSON_recovered_dictionaries[ID])
+                        )
+
+           #  print("Recovered and converted objects.--------------")
+           #  print(self.__objects,end="\n\n")
 
         except OSError:
             pass
