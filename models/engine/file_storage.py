@@ -53,7 +53,7 @@ class FileStorage:
         converted_objects = {}
 
         #  print("SAVING-----")
-        print(self.__objects)
+        #print(self.__objects)
         for ID in self.__objects.keys():
             converted_objects.update(
                 {f"{ID}": self.__objects[ID].to_dict()}
