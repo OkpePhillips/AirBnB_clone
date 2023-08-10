@@ -46,3 +46,6 @@ def test_serialize_deserialize_user():
     print(my_user2)
 
 test_serialize_deserialize_general()
+
+print("\n")
+test_serialize_deserialize_user()
