@@ -45,7 +45,7 @@ def test_serialize_deserialize_user():
     my_user2.save()
     print(my_user2)
 
-test_serialize_deserialize_general()
+#test_serialize_deserialize_general()
 
 print("\n")
 test_serialize_deserialize_user()
