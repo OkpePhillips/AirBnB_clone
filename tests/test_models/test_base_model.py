@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 """
 Module to test the BaseModel class and its features
 """
@@ -64,7 +64,7 @@ class TestBaseModel(unittest.TestCase):
         base_model_1 = BaseModel()
         base_model_2 = BaseModel()
         self.assertNotEqual(base_model_1.id, base_model_2.id)
-        self.assertIsInstance(base_model_1.id, uuid)
+        self.assertIsInstance(base_model_1.id, str)
 
     def test_kwargs(self):
         """
