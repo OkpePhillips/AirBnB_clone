@@ -11,9 +11,24 @@ from models.base_model import BaseModel
 import json
 from models import storage
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
-class_dict = {"BaseModel": BaseModel, "User": User,
-              "user": User, "basemodel": BaseModel}
+
+class_dict = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review
+        }
+
+
 class HBNBCommand(cmd.Cmd):
     """
     Subclass Cmd for project console functionality.
@@ -125,7 +140,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """
-        Prints the string representation of all instances based on the class name.
+        Prints the string representation of all instances
+        based on the class name.
         """
         storage.reload()
         args = line.split()
@@ -181,6 +197,7 @@ class HBNBCommand(cmd.Cmd):
         instance = objects[obj_key]
         setattr(instance, attribute_name, eval(attr_type)(attribute_value))
         instance.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

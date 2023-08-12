@@ -42,7 +42,7 @@ class BaseModel:
         Method to modify the updated_at attribute of an instance of BaseModel.
         """
         self.updated_at = datetime.now()
-        #storage.instance_edit(self)
+        # storage.instance_edit(self)
         models.storage.save()
 
     def to_dict(self):
@@ -52,9 +52,11 @@ class BaseModel:
         """
 
         """
-        created_at and updated_at must be converted to string object in ISO format:
-format: %Y-%m-%dT%H:%M:%S.%f (ex: 2017-06-14T22:31:03.285259)
-you can use isoformat() of datetime object
+        Note:
+        created_at and updated_at must be converted to string object
+        in ISO format:
+        format: %Y-%m-%dT%H:%M:%S.%f (ex: 2017-06-14T22:31:03.285259)
+        you can use isoformat() of datetime object
         """
         dictionary = self.__dict__.copy()
         dictionary.update({"__class__": self.__class__.__name__})

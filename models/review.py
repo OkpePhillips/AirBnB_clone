@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
 """
-Defines class 'User'
+Defines class 'Review'
 """
 
 
 from models.base_model import BaseModel
 
 
-class User(BaseModel):
+class Review(BaseModel):
     """
-    Class definition for User class.
+    Definition of the Review class.
     Subclasses BaseModel.
     """
 
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    place_id = ""  # Place.id
+    user_id = ""  # User.id
+    text = ""
 
     def __init__(self, *args, **kwargs):
         super().__init__(**kwargs)
