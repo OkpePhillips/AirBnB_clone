@@ -53,6 +53,7 @@ class HBNBCommand(cmd.Cmd):
         self.do_quit(line)
 
     def emptyline(self):
+        """ Does nothing when empty line encountered."""
         pass
 
     def do_create(self, line):

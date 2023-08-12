@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Defines class 'City'
 """
@@ -16,4 +16,7 @@ class City(BaseModel):
     name = ""
 
     def __init__(self, *args, **kwargs):
+        """
+        Method to inherit BaseModel initialisation.
+        """
         super().__init__(**kwargs)

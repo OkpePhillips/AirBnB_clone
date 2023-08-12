@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 """
 Module defines class 'FileStorage'
@@ -15,7 +15,6 @@ from models.place import Place
 from models.review import Review
 
 
-
 class FileStorage:
     """
     This class handles serialization and deserialization of instances
@@ -23,6 +22,9 @@ class FileStorage:
     """
 
     def __init__(self):
+        """
+        Method to initialise storage instance.
+        """
         self.__file_path = "file.json"
         self.__objects = {}
         # Stores objects in format { <ClassName>.id: object }
@@ -42,31 +44,24 @@ class FileStorage:
 
         ####OLD
         self.__objects.update(
-                {f"{type(obj).__name__}.{obj.id}": obj.to_dict()} 
+                {f"{type(obj).__name__}.{obj.id}": obj.to_dict()}
                 )   #TODO
 
         """
         self.__objects.update(
-                {f"{type(obj).__name__}.{obj.id}": obj})   
-
+                {f"{type(obj).__name__}.{obj.id}": obj})
 
     def save(self):
         """
         Serialize self.__objects to JSON put in path {self.__file_path}
         """
 
-        
         converted_objects = {}
 
-        #  print("SAVING-----")
-        #print(self.__objects)
         for ID in self.__objects.keys():
             converted_objects.update(
                 {f"{ID}": self.__objects[ID].to_dict()}
                 )
-
-        #  print("ENDSAVE\n")
-            
 
         """
         ####OLD
@@ -78,21 +73,15 @@ class FileStorage:
 
         with open(self.__file_path, "w") as file:
             json.dump(converted_objects, file)
-            
 
     def reload(self):
         """
         Deserialize JSON file to self.__objects.
         """
-
-##TODO............
         try:
             with open(self.__file_path, "r") as file:
 
                 JSON_recovered_dictionaries = json.load(file)
-
-             #   print("Recovered Dictionaries--------")
-             #  print(JSON_recovered_dictionaries,end="\n\n" )
 
             for ID in JSON_recovered_dictionaries.keys():
                 obj_class = JSON_recovered_dictionaries[ID]["__class__"]
@@ -100,15 +89,12 @@ class FileStorage:
                         eval(obj_class)(**JSON_recovered_dictionaries[ID])
                         )
 
-           #  print("Recovered and converted objects.--------------")
-           #  print(self.__objects,end="\n\n")
-
         except OSError:
             pass
 
     def instance_edit(self, obj):
         """
-        Edits instance dictionary representation in 
+        Edits instance dictionary representation in
         __objects once model update method is called.
         """
 
