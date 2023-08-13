@@ -18,4 +18,4 @@ class TestPlace(unittest.TestCase):
         """
         base_model = BaseModel()
         self.assertTrue(hasattr(base_model, 'id'))
-        self.assertIsInstance(base_model.id, str)s
+        self.assertIsInstance(base_model.id, str)
