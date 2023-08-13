@@ -199,6 +199,21 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attribute_name, eval(attr_type)(attribute_value))
         instance.save()
 
+    def do_count(self, class_name):
+        """
+        Method to return the count of instances of a class.
+        """
+        storage.reload()
+        objects = storage.all()
+        instance_count = 0
+        if class_name in class_dict:
+            for instance in objects.values():
+                if instance.__class__.__name__ == class_name:
+                    instance_count += 1
+            print(instance_count)
+        else:
+            print("** class doesn't exist **")
+
     def default(self, line):
         """
         Method to handle commands prefixed by defined method names.
