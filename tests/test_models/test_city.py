@@ -12,5 +12,10 @@ class TestCity(unittest.TestCase):
     """
     Class tests all 'City' features.
     """
-
-    pass
+    def test_id(self):
+        """
+        Method to test the id attribute.
+        """
+        base_model = BaseModel()
+        self.assertTrue(hasattr(base_model, 'id'))
+        self.assertIsInstance(base_model.id, str)
