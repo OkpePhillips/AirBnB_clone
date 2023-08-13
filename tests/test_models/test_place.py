@@ -8,7 +8,7 @@ from models.place import Place
 from models.base_model import BaseModel
 
 
-class TestPlace(unittest.Testcase):
+class TestPlace(unittest.TestCase):
     """
     Class tests all 'Place' features.
     """
