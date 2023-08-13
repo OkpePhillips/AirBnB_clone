@@ -11,6 +11,10 @@ import json
 
 
 class Test_File_Storage(unittest.TestCase):
+    """
+    This class defines the test cases for class 'FileStorage'.
+    Inherits unittest.TestCase.
+    """
 
     def setUp(self):
         """Method ran at start of test """
