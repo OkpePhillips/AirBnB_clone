@@ -38,14 +38,13 @@ class TestUser(unittest.TestCase):
         Tests the dictionary created before the JSON dump is made.
         Checks if class specific variables are stored.
         """
-        
+
         test_dict = self.main_inst.to_dict()
 
         self.assertIn("email", test_dict)
         self.assertIn("password", test_dict)
         self.assertIn("first_name", test_dict)
         self.assertIn("last_name", test_dict)
-
 
     def test_successful_reload(self):
         """
