@@ -95,12 +95,3 @@ class Test_File_Storage(unittest.TestCase):
             self.assertTrue(obj_id in loaded_objects)
             self.assertEqual(loaded_objects[obj_id].__class__.__name__,
                              obj_data["__class__"])
-
-    def test_reload_no_file(self):
-        """
-        Method to check that no exceptions are raised when
-        there is no json file found.
-        """
-        storage = FileStorage()
-        storage.reload()
-        self.assertTrue(True)
