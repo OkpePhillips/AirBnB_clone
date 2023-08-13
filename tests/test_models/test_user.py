@@ -8,7 +8,7 @@ import unittest
 from models.user import User
 from models.base_model import BaseModel
 
-class Test_User(unittest.TestCase):
+class TestUser(unittest.TestCase):
     """
     This class defines the test cases for class 'User'
     Inherits unittest.TestCase.
