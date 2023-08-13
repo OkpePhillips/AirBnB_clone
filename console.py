@@ -79,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
         storage.reload()
         args = line.split()
         if len(args) < 1:
-            print("** class name is missing **")
+            print("** class name missing **")
             return
         elif len(args) == 1:
             class_name = args[0]
