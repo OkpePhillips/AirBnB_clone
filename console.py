@@ -199,6 +199,22 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attribute_name, eval(attr_type)(attribute_value))
         instance.save()
 
+    def default(self, line):
+        """
+        Method to handle commands prefixed by defined method names.
+        """
+        parts = line.split('.')
+        if len(parts) == 2:
+            class_name, method_name = parts
+            method_name = method_name.strip("()")
+            if class_name in class_dict:
+                if hasattr(self, f'do_{method_name}'):
+                    eval(f"self.do_{method_name}")(class_name)
+                    return
+            else:
+                print("** class doesn't exist **")
+        print("*** Unknown syntax:", line)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
