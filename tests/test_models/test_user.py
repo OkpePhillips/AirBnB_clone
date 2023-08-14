@@ -1,8 +1,8 @@
 #!/usr/bin/python3
+"""
+Test for the Attributes of the class 'User'
+"""
 
-"""
-This module contains the test class for class 'User'.
-"""
 
 import unittest
 from models.user import User
@@ -11,16 +11,8 @@ from models.base_model import BaseModel
 
 class TestUser(unittest.TestCase):
     """
-    This class defines the test cases for class 'User'
-    Inherits unittest.Testcase.
-
-    Since this class inherits BaseModel, tests will be more focused
-    on functions drectly interacting with the information processing
-    for the class.
-    Core tests are done for the BaseModel class already.
-    Shoutout Godwin!
+    Test class for the user attributes.
     """
-
     def setUp(self):
         """
         Sets a general instance for succeeding testing purposes.
@@ -50,7 +42,7 @@ class TestUser(unittest.TestCase):
         """
         Tests for the successful reload of class specific variables
         effectively restoring an object by cloning its data.
-        Instanciation uses the main_inst dictionary.
+        Instantiation uses the main_inst dictionary.
         """
 
         main_inst_dict = self.main_inst.to_dict()
@@ -59,3 +51,31 @@ class TestUser(unittest.TestCase):
         self.assertIn("password", main_inst_dict)
         self.assertIn("first_name", main_inst_dict)
         self.assertIn("last_name", main_inst_dict)
+
+    def test_user_email(self):
+        """
+        Checks that email attribute is properly set.
+        """
+        self.user = User()
+        self.assertEqual(self.user.email, "")
+
+    def test_user_password(self):
+        """
+        Checks that password attribute is properly set.
+        """
+        self.user = User()
+        self.assertEqual(self.user.password, "")
+
+    def test_user_first_name(self):
+        """
+        Checks that first_name attribute is properly set.
+        """
+        self.user = User()
+        self.assertEqual(self.user.first_name, "")
+
+    def test_user_last_name(self):
+        """
+        Checks that last_name attribute is properly set.
+        """
+        self.user = User()
+        self.assertEqual(self.user.last_name, "")

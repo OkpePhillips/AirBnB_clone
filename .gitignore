@@ -2,3 +2,4 @@ file.json
 *.swp
 *.swo
 problematic*
+*.pyc
