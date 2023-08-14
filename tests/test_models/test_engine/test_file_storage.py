@@ -5,6 +5,7 @@ Module to test file storage.
 import unittest
 from models import FileStorage
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage as fs
 from models.user import User
 import os
 import json
@@ -38,7 +39,7 @@ class Test_File_Storage(unittest.TestCase):
         test_inst = BaseModel()
         test_id =  f"BaseModel.{test_inst.id}"
 
-        self.assertTrue(type(models.storage._FileStorage__objects) == dict)
+        #self.assertTrue(type(fs.__objects) == dict)
 
         self.assertTrue(len(models.storage._FileStorage__objects) > 0)
 

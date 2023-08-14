@@ -19,3 +19,8 @@ class TestAmenity(unittest.TestCase):
         base_model = BaseModel()
         self.assertTrue(hasattr(base_model, 'id'))
         self.assertIsInstance(base_model.id, str)
+
+    def test_name(self):
+        """ Test name attribute."""
+        self.amenity = Amenity()
+        self.assertEqual(self.amenity.name, "")

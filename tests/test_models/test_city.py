@@ -19,3 +19,13 @@ class TestCity(unittest.TestCase):
         base_model = BaseModel()
         self.assertTrue(hasattr(base_model, 'id'))
         self.assertIsInstance(base_model.id, str)
+
+    def test_state_id(self):
+        """ Tests state_id. """
+        self.city = City()
+        self.assertEqual(self.city.state_id, "")
+
+    def test_name(self):
+        """Tests name attribute"""
+        self.city = City()
+        self.assertEqual(self.city.name, "")
