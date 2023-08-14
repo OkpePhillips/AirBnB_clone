@@ -92,6 +92,10 @@ class TestBaseModel(unittest.TestCase):
         base_model.name = 'Test Name'
         base_model.save()
         self.assertNotEqual(base_model.updated_at, initial_updated_at)
+    
+    def test_save(self):
+        base_model = BaseModel()
+        base_model.save()
 
     def test_to_dict_attributes(self):
         """
