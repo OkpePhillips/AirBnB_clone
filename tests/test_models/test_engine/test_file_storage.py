@@ -8,7 +8,7 @@ from models.base_model import BaseModel
 from models.user import User
 import os
 import json
-
+import models
 
 class Test_File_Storage(unittest.TestCase):
     """
@@ -27,6 +27,25 @@ class Test_File_Storage(unittest.TestCase):
                 os.remove(self.storage._FileStorage__file_path)
             except FileNotFoundError:
                 pass
+
+    def test_object_store(self):
+        """
+        Tests whether the FileStorage __objects variable:
+        1. is a dictionary
+        2. contains at least one object properly formatted created from
+            the BaseModel object created by the test method.
+        """
+
+        test_inst = BaseModel()
+        test_id =  f"BaseModel.{test_inst.id}"
+
+        self.assertTrue(type(models.storage._FileStorage__objects) == dict)
+
+        self.assertTrue(len(models.storage._FileStorage__objects) > 0)
+
+        self.assertTrue(test_id in models.storage._FileStorage__objects)
+
+        # Latest Change HERE
 
     def test_file_path(self):
         """ Method to check file_path attribute. """
