@@ -184,7 +184,7 @@ class HBNBCommand(cmd.Cmd):
         objects = storage.all()
         obj_key = f"{class_name}.{obj_id}"
         if obj_key not in objects:
-            print("** instance not found **")
+            print("** no instance found **")
             return
         if len(args) < 3:
             print("** attribute name missing **")
