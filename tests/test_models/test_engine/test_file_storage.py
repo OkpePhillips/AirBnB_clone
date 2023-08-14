@@ -44,6 +44,7 @@ class Test_File_Storage(unittest.TestCase):
 
         self.assertTrue(test_id in models.storage.all())
 
+        self.assertIsNotNone(FileStorage.all)
         # Latest Change HERE
 
 
