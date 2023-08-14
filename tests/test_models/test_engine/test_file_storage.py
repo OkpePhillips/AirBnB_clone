@@ -8,6 +8,8 @@ from models.base_model import BaseModel
 from models.user import User
 import os
 import json
+import models
+
 class Test_File_Storage(unittest.TestCase):
     """
     This class defines the test cases for class 'FileStorage'.
@@ -16,6 +18,7 @@ class Test_File_Storage(unittest.TestCase):
     def setUp(self):
         """Method ran at start of test """
         self.storage = FileStorage()
+
     def tearDown(self):
         """ Method ran after test to free resources. """
         if self.storage is not None:
@@ -23,15 +26,38 @@ class Test_File_Storage(unittest.TestCase):
                 os.remove(self.storage._FileStorage__file_path)
             except FileNotFoundError:
                 pass
+
+    def test_object_store(self):
+        """
+        Tests whether the FileStorage __objects variable:
+        1. is a dictionary
+        2. contains at least one object properly formatted created from
+            the BaseModel object created by the test method.
+        """
+
+        test_inst = BaseModel()
+        test_id =  f"BaseModel.{test_inst.id}"
+
+        self.assertTrue(type(models.storage._FileStorage__objects) == dict)
+
+        self.assertTrue(len(models.storage._FileStorage__objects) > 0)
+
+        self.assertTrue(test_id in models.storage._FileStorage__objects)
+
+        # Latest Change HERE
+
+
     def test_file_path(self):
         """ Method to check file_path attribute. """
         storage = FileStorage()
         self.assertEqual(storage._FileStorage__file_path, "file.json")
+
     def test_objects_initialized_empty_dictionary(self):
         """Method to check objects initialised empty dictionary."""
         storage = FileStorage()
         self.assertIsInstance(storage._FileStorage__objects, dict)
         self.assertEqual(len(storage._FileStorage__objects), 0)
+
     def test_all_returns_correct_dictionary(self):
         """Method to check correct dictionary is returned. """
         base_model = BaseModel()
@@ -42,6 +68,7 @@ class Test_File_Storage(unittest.TestCase):
         self.assertEqual(len(all_objects), 2)
         self.assertIn(f"BaseModel.{base_model.id}", all_objects)
         self.assertIn(f"User.{user.id}", all_objects)
+
     def test_new_method(self):
         """ Method to check new() saves all objects. """
         base_model = BaseModel()
@@ -52,6 +79,7 @@ class Test_File_Storage(unittest.TestCase):
         self.assertEqual(len(all_objects), 2)
         self.assertIn(f"BaseModel.{base_model.id}", all_objects)
         self.assertIn(f"User.{user.id}", all_objects)
+
     def test_save_method(self):
         """ Method to check save creates a json file. """
         base_model = BaseModel()
@@ -62,6 +90,7 @@ class Test_File_Storage(unittest.TestCase):
             self.assertIn(f"BaseModel.{base_model.id}", file_content)
             self.assertIn("created_at", file_content)
             self.assertIn("updated_at", file_content)
+
     def test_reload_method(self):
         """ Method to check that all objects are reloaded. """
         test_data = {
