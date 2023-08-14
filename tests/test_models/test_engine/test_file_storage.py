@@ -42,7 +42,7 @@ class Test_File_Storage(unittest.TestCase):
 
         self.assertTrue(len(models.storage._FileStorage__objects) > 0)
 
-        self.assertTrue(test_id in models.storage._FileStorage__objects)
+        self.assertTrue(test_id in models.storage.all())
 
         # Latest Change HERE
 
