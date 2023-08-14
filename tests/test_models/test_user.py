@@ -2,6 +2,8 @@
 """
 Test for the Attributes of the class 'User'
 """
+
+
 import unittest
 from models.user import User
 from models.base_model import BaseModel
@@ -39,7 +41,7 @@ class TestUser(unittest.TestCase):
     def test_successful_reload(self):
         """
         Tests for the successful reload of class specific variables
-        effectively estoring an object by cloning its data.
+        effectively restoring an object by cloning its data.
         Instantiation uses the main_inst dictionary.
         """
 
