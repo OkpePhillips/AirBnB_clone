@@ -59,3 +59,27 @@ class TestUser(unittest.TestCase):
         self.assertIn("password", main_inst_dict)
         self.assertIn("first_name", main_inst_dict)
         self.assertIn("last_name", main_inst_dict)
+
+    def test_user_email(self):
+        """
+        Checks that email attribute is properly set.
+        """
+        self.assertEqual(self.main_inst.email, "example@mailservice.com")
+
+    def test_user_password(self):
+        """
+        Checks that password attribute is properly set.
+        """
+        self.assertEqual(self.main_inst.password, "Admin")
+
+    def test_user_first_name(self):
+        """
+        Checks that first_name attribute of User class is set.
+        """
+        self.assertEqual(self.main_inst.first_name, "David")
+
+    def test_user_last_name(self):
+        """
+        Checks that last_name attribute is properly set.
+        """
+        self.assertEqual(self.main_inst.last_name, "Malan")
