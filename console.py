@@ -220,15 +220,46 @@ class HBNBCommand(cmd.Cmd):
         """
         parts = line.split('.')
         if len(parts) == 2:
-            class_name, method_name = parts
-            method_name = method_name.strip("()")
-            if class_name in class_dict:
-                if hasattr(self, f'do_{method_name}'):
-                    eval(f"self.do_{method_name}")(class_name)
-                    return
+            obj_id = ""
+            new_command = ""
+            class_name, method_args = parts
+            method_name, *args = method_args.split('(')
+
+            if args and args[0]:
+                args = args[0].rstrip(')').split(',')
+
+                if len(args) == 1:
+                    if args[0] != "":
+                        obj_id = args[0].strip()
+
+                        new_command = f"{class_name} {obj_id}"
+                        if class_name in class_dict:
+                            if hasattr(self, f'do_{method_name}'):
+                                eval(f"self.do_{method_name}")(new_command)
+                        else:
+                            print("** class doesn't exist **")
+                    else:
+                        if class_name in class_dict:
+                            if hasattr(self, f'do_{method_name}'):
+                                eval(f'self.do_{method_name}')(class_name)
+                        else:
+                            print("** class doesn't exist **")
+                if len(args) == 3:
+                    obj_id = args[0].strip()
+                    attr_name = args[1].strip()
+                    attr_value = args[2].strip()
+
+                    new_command = f"{class_name} {obj_id} {attr_name} " \
+                                  f"{attr_value}"
+                    if class_name in class_dict:
+                        if hasattr(self, f'do_{method_name}'):
+                            eval(f"self.do_{method_name}")(new_command)
+                    else:
+                        print("** class doesn't exist **")
             else:
-                print("** class doesn't exist **")
-        print("*** Unknown syntax:", line)
+                print("** Unknown syntax:", line)
+        else:
+            print("*** Unknown syntax:", line)
 
 
 if __name__ == '__main__':
